@@ -1,0 +1,337 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#0a0a0a">
+  <title>Polario — Remove watermarks instantly</title>
+  <meta name="description" content="AI-powered image cleaning tool. Upload any image, remove unwanted overlays and artifacts in seconds. No editing skills needed.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&family=Outfit:wght@300;400;500;600&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+    :root {
+      --bg: #fafaf8;
+      --bg-elevated: #ffffff;
+      --text-primary: #0a0a0a;
+      --text-secondary: #6b6b6b;
+      --text-tertiary: #9a9a9a;
+      --border: rgba(0,0,0,0.08);
+      --border-hover: rgba(0,0,0,0.15);
+      --accent: #1a1a1a;
+      --accent-subtle: #f0f0ee;
+      --success: #1a7a4c;
+      --success-bg: #edf7f0;
+    }
+    @media (prefers-color-scheme: dark) {
+      :root {
+        --bg: #0a0a0a;
+        --bg-elevated: #141414;
+        --text-primary: #e8e8e4;
+        --text-secondary: #8a8a8a;
+        --text-tertiary: #5a5a5a;
+        --border: rgba(255,255,255,0.08);
+        --border-hover: rgba(255,255,255,0.15);
+        --accent: #e8e8e4;
+        --accent-subtle: #1a1a18;
+        --success: #4ade80;
+        --success-bg: #0d2818;
+      }
+    }
+    body {
+      font-family: 'Outfit', -apple-system, sans-serif;
+      background: var(--bg);
+      color: var(--text-primary);
+      -webkit-font-smoothing: antialiased;
+    }
+    nav {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 20px 32px;
+      border-bottom: 1px solid var(--border);
+    }
+    .logo {
+      font-family: 'Space Mono', monospace;
+      font-weight: 700;
+      font-size: 18px;
+      letter-spacing: -0.5px;
+      color: var(--text-primary);
+      text-decoration: none;
+    }
+    .logo span { color: var(--text-tertiary); font-weight: 400; font-size: 13px; margin-left: 10px; letter-spacing: 0; }
+    .nav-right { display: flex; align-items: center; gap: 24px; }
+    .nav-link { font-size: 14px; color: var(--text-secondary); text-decoration: none; font-weight: 400; transition: color 0.15s; }
+    .nav-link:hover { color: var(--text-primary); }
+    .btn-login {
+      font-family: 'Outfit', sans-serif;
+      font-size: 13px; font-weight: 500;
+      color: var(--bg); background: var(--accent);
+      border: none; padding: 8px 20px; border-radius: 100px;
+      cursor: pointer; transition: opacity 0.2s; text-decoration: none;
+    }
+    .btn-login:hover { opacity: 0.85; }
+
+    /* Hero */
+    .hero {
+      text-align: center;
+      padding: 80px 24px 60px;
+      max-width: 640px;
+      margin: 0 auto;
+    }
+    .hero h1 {
+      font-size: 48px;
+      font-weight: 600;
+      letter-spacing: -2px;
+      line-height: 1.08;
+      margin-bottom: 16px;
+    }
+    .hero p {
+      font-size: 18px;
+      color: var(--text-secondary);
+      font-weight: 300;
+      line-height: 1.6;
+      margin-bottom: 32px;
+    }
+    .hero-cta {
+      display: inline-block;
+      font-family: 'Outfit', sans-serif;
+      font-size: 15px; font-weight: 500;
+      color: var(--bg); background: var(--accent);
+      border: none; padding: 14px 36px; border-radius: 100px;
+      cursor: pointer; transition: all 0.2s; text-decoration: none;
+    }
+    .hero-cta:hover { opacity: 0.88; transform: translateY(-1px); }
+
+    /* How it works */
+    .how-section {
+      padding: 60px 24px;
+      max-width: 720px;
+      margin: 0 auto;
+      border-top: 1px solid var(--border);
+    }
+    .section-title {
+      font-size: 28px;
+      font-weight: 600;
+      letter-spacing: -1px;
+      text-align: center;
+      margin-bottom: 48px;
+    }
+    .steps-row {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 32px;
+    }
+    .step-card { text-align: center; }
+    .step-num {
+      width: 40px; height: 40px;
+      border-radius: 50%;
+      background: var(--accent);
+      color: var(--bg);
+      display: flex; align-items: center; justify-content: center;
+      font-size: 15px; font-weight: 600;
+      margin: 0 auto 16px;
+    }
+    .step-card h3 { font-size: 16px; font-weight: 500; margin-bottom: 6px; }
+    .step-card p { font-size: 13px; color: var(--text-secondary); line-height: 1.5; font-weight: 300; }
+
+    /* Pricing */
+    .pricing-section {
+      padding: 80px 24px;
+      max-width: 800px;
+      margin: 0 auto;
+      border-top: 1px solid var(--border);
+    }
+    .pricing-subtitle {
+      text-align: center;
+      font-size: 15px;
+      color: var(--text-secondary);
+      font-weight: 300;
+      margin-top: -36px;
+      margin-bottom: 48px;
+    }
+    .pricing-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 16px;
+    }
+    .price-card {
+      background: var(--bg-elevated);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      padding: 32px 24px;
+      text-align: center;
+      transition: border-color 0.2s;
+    }
+    .price-card:hover { border-color: var(--border-hover); }
+    .price-card.popular { border: 2px solid var(--accent); }
+    .popular-badge {
+      font-size: 11px;
+      font-weight: 500;
+      color: var(--bg);
+      background: var(--accent);
+      padding: 4px 12px;
+      border-radius: 100px;
+      display: inline-block;
+      margin-bottom: 16px;
+    }
+    .price-credits { font-size: 14px; color: var(--text-secondary); font-weight: 400; margin-bottom: 8px; }
+    .price-amount { font-size: 36px; font-weight: 600; letter-spacing: -1.5px; margin-bottom: 4px; }
+    .price-per { font-size: 13px; color: var(--text-tertiary); margin-bottom: 24px; }
+    .price-btn {
+      display: block;
+      width: 100%;
+      font-family: 'Outfit', sans-serif;
+      font-size: 14px; font-weight: 500;
+      padding: 10px 20px;
+      border-radius: 10px;
+      cursor: pointer;
+      transition: all 0.15s;
+      text-decoration: none;
+      border: 1px solid var(--border);
+      background: transparent;
+      color: var(--text-primary);
+    }
+    .price-btn:hover { border-color: var(--border-hover); background: var(--accent-subtle); }
+    .price-card.popular .price-btn {
+      background: var(--accent);
+      color: var(--bg);
+      border-color: var(--accent);
+    }
+    .price-card.popular .price-btn:hover { opacity: 0.88; }
+    .pricing-note {
+      text-align: center;
+      margin-top: 24px;
+      font-size: 13px;
+      color: var(--text-tertiary);
+    }
+
+    /* Features */
+    .features-section {
+      padding: 60px 24px 80px;
+      max-width: 720px;
+      margin: 0 auto;
+      border-top: 1px solid var(--border);
+    }
+    .features-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 24px;
+    }
+    .feature-item h3 { font-size: 15px; font-weight: 500; margin-bottom: 4px; }
+    .feature-item p { font-size: 13px; color: var(--text-secondary); line-height: 1.5; font-weight: 300; }
+
+    /* Footer */
+    footer {
+      text-align: center;
+      padding: 24px;
+      font-size: 12px;
+      color: var(--text-tertiary);
+      border-top: 1px solid var(--border);
+    }
+    footer a { color: var(--text-secondary); text-decoration: none; }
+    footer a:hover { color: var(--text-primary); }
+
+    @media (max-width: 600px) {
+      nav { padding: 16px 20px; }
+      .hero { padding: 48px 20px 40px; }
+      .hero h1 { font-size: 34px; }
+      .steps-row { grid-template-columns: 1fr; gap: 24px; }
+      .pricing-grid { grid-template-columns: 1fr; }
+      .features-grid { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+
+  <nav>
+    <a href="/" class="logo">polario<span>.now</span></a>
+    <div class="nav-right">
+      <a href="#pricing" class="nav-link">Pricing</a>
+      <a href="#how" class="nav-link">How it works</a>
+      <a href="#" class="btn-login">Sign in</a>
+    </div>
+  </nav>
+
+  <section class="hero">
+    <h1>Clean any image.<br>Instantly.</h1>
+    <p>AI-powered image cleaning that removes unwanted overlays, text artifacts, and visual obstructions in seconds. No editing skills required.</p>
+    <a href="#" class="hero-cta">Try free — 3 images/day</a>
+  </section>
+
+  <section class="how-section" id="how">
+    <h2 class="section-title">How it works</h2>
+    <div class="steps-row">
+      <div class="step-card">
+        <div class="step-num">1</div>
+        <h3>Upload</h3>
+        <p>Drop or select any image. PNG, JPG, or WEBP up to 20MB.</p>
+      </div>
+      <div class="step-card">
+        <div class="step-num">2</div>
+        <h3>AI processes</h3>
+        <p>Our AI detects and removes unwanted overlays automatically. No manual selection needed.</p>
+      </div>
+      <div class="step-card">
+        <div class="step-num">3</div>
+        <h3>Download</h3>
+        <p>Get your clean image back in seconds. Same quality, no artifacts.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="pricing-section" id="pricing">
+    <h2 class="section-title">Pricing</h2>
+    <p class="pricing-subtitle">Start free. Buy credits when you need more.</p>
+    <div class="pricing-grid">
+      <div class="price-card">
+        <div class="price-credits">5 credits</div>
+        <div class="price-amount">$2.99</div>
+        <div class="price-per">$0.60 per image</div>
+        <a href="#" class="price-btn">Get started</a>
+      </div>
+      <div class="price-card popular">
+        <div class="popular-badge">Most popular</div>
+        <div class="price-credits">25 credits</div>
+        <div class="price-amount">$9.99</div>
+        <div class="price-per">$0.40 per image</div>
+        <a href="#" class="price-btn">Get started</a>
+      </div>
+      <div class="price-card">
+        <div class="price-credits">100 credits</div>
+        <div class="price-amount">$29.99</div>
+        <div class="price-per">$0.30 per image</div>
+        <a href="#" class="price-btn">Get started</a>
+      </div>
+    </div>
+    <p class="pricing-note">1 credit = 1 image processed. 3 free images per day, no account needed.</p>
+  </section>
+
+  <section class="features-section">
+    <h2 class="section-title">Built for speed and privacy</h2>
+    <div class="features-grid">
+      <div class="feature-item">
+        <h3>AI-powered detection</h3>
+        <p>Advanced computer vision automatically identifies overlays, text, and artifacts — no manual masking.</p>
+      </div>
+      <div class="feature-item">
+        <h3>Quality preserved</h3>
+        <p>AI inpainting reconstructs the image beneath, maintaining original resolution and detail.</p>
+      </div>
+      <div class="feature-item">
+        <h3>Auto-deleted</h3>
+        <p>Your images are processed securely and automatically deleted within 48 hours. We never store or share them.</p>
+      </div>
+      <div class="feature-item">
+        <h3>Works on everything</h3>
+        <p>Text overlays, logos, date stamps, draft marks, proof text, and other visual obstructions.</p>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <a href="/">polario.now</a> &middot; A <a href="https://lirium.ai">Lirium AI</a> product &middot; <a href="/terms.html">Terms</a> &middot; <a href="/privacy.html">Privacy</a>
+  </footer>
+
+</body>
+</html>
