@@ -289,6 +289,19 @@
       50%, 85% { opacity: 1; }
       100%     { opacity: 0; }
     }
+    .demo-hint {
+      text-align: center;
+      margin-top: 14px;
+      font-size: 13px;
+      color: var(--text-tertiary);
+      font-weight: 400;
+      animation: hintFade 6s ease-in-out infinite;
+    }
+    @keyframes hintFade {
+      0%, 30%  { opacity: 1; }
+      45%, 55% { opacity: 0; }
+      70%, 100% { opacity: 1; }
+    }
     @media (max-width: 768px) {
       .demo-container { aspect-ratio: 3 / 2; }
     }
@@ -494,6 +507,7 @@
       <span class="demo-label demo-label--before">Before</span>
       <span class="demo-label demo-label--after">After</span>
     </div>
+    <p class="demo-hint">Watch the watermark disappear</p>
   </section>
 
   <section class="how-section reveal" id="how">
