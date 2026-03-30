@@ -225,7 +225,7 @@
     .cta-btn:hover { opacity: 0.88; transform: translateY(-1px); }
     .cta-btn svg { width: 16px; height: 16px; fill: currentColor; }
 
-    /* Before/After */
+    /* Demo crossfade */
     .demo-section {
       padding: 0 24px 60px;
       max-width: 720px;
@@ -237,79 +237,27 @@
       overflow: hidden;
       border: 1px solid var(--border);
       aspect-ratio: 16 / 9;
-      cursor: col-resize;
-      user-select: none;
-      -webkit-user-select: none;
     }
-    .demo-side {
-      position: absolute;
-      top: 0;
-      bottom: 0;
-      overflow: hidden;
-    }
-    .demo-side--before {
-      left: 0;
-      right: 50%;
-      background: var(--bg-elevated);
-    }
-    .demo-side--after {
-      left: 50%;
-      right: 0;
-      background: var(--bg-elevated);
-    }
-    .demo-side img {
+    .demo-container img {
       position: absolute;
       top: 0;
       left: 0;
-      width: 720px;
-      max-width: none;
+      width: 100%;
       height: 100%;
       object-fit: cover;
       object-position: center;
     }
-    .demo-side--after img {
-      left: auto;
-      right: 0;
+    .demo-container .demo-before {
+      z-index: 1;
+      animation: crossfade 6s ease-in-out infinite;
     }
-    @media (max-width: 768px) {
-      .demo-container { aspect-ratio: 3 / 2; }
-      .demo-side img { width: calc(100vw - 48px); }
+    .demo-container .demo-after {
+      z-index: 0;
     }
-    .demo-divider {
-      position: absolute;
-      top: 0;
-      bottom: 0;
-      left: 50%;
-      width: 3px;
-      background: var(--accent);
-      transform: translateX(-50%);
-      z-index: 2;
-      pointer-events: none;
-    }
-    .demo-divider::before {
-      content: '';
-      position: absolute;
-      top: 50%;
-      left: 50%;
-      transform: translate(-50%, -50%);
-      width: 36px;
-      height: 36px;
-      border-radius: 50%;
-      background: var(--accent);
-      box-shadow: 0 2px 8px rgba(0,0,0,0.3);
-    }
-    .demo-divider::after {
-      content: '\2039  \203A';
-      position: absolute;
-      top: 50%;
-      left: 50%;
-      transform: translate(-50%, -50%);
-      color: var(--bg);
-      font-size: 16px;
-      font-weight: 700;
-      letter-spacing: 8px;
-      z-index: 3;
-      pointer-events: none;
+    @keyframes crossfade {
+      0%, 35%  { opacity: 1; }
+      50%, 85% { opacity: 0; }
+      100%     { opacity: 1; }
     }
     .demo-label {
       position: absolute;
@@ -320,18 +268,29 @@
       text-transform: uppercase;
       letter-spacing: 1px;
       border-radius: 100px;
-      z-index: 1;
+      z-index: 2;
       pointer-events: none;
+      transition: opacity 0.3s;
     }
     .demo-label--before {
       left: 12px;
       background: rgba(0,0,0,0.5);
       color: #fff;
+      animation: crossfade 6s ease-in-out infinite;
     }
     .demo-label--after {
       right: 12px;
       background: var(--accent);
       color: var(--bg);
+      animation: crossfade-inv 6s ease-in-out infinite;
+    }
+    @keyframes crossfade-inv {
+      0%, 35%  { opacity: 0; }
+      50%, 85% { opacity: 1; }
+      100%     { opacity: 0; }
+    }
+    @media (max-width: 768px) {
+      .demo-container { aspect-ratio: 3 / 2; }
     }
 
     /* How it works */
@@ -529,16 +488,11 @@
   </section>
 
   <section class="demo-section reveal">
-    <div class="demo-container" id="demo">
-      <div class="demo-side demo-side--before" id="demo-before">
-        <img src="/example-with.jpg" alt="Photo with watermark overlay — before processing with Polario">
-        <span class="demo-label demo-label--before">Before</span>
-      </div>
-      <div class="demo-side demo-side--after" id="demo-after">
-        <img src="/test-post.png" alt="Clean photo after watermark removal by Polario">
-        <span class="demo-label demo-label--after">After</span>
-      </div>
-      <div class="demo-divider" id="demo-divider"></div>
+    <div class="demo-container">
+      <img src="/example-with.jpg" alt="Photo with watermark overlay" class="demo-before">
+      <img src="/test-post.png" alt="Clean photo after processing with Polario" class="demo-after">
+      <span class="demo-label demo-label--before">Before</span>
+      <span class="demo-label demo-label--after">After</span>
     </div>
   </section>
 
@@ -636,30 +590,6 @@
   </footer>
 
   <script>
-    (function() {
-      var demo = document.getElementById('demo');
-      var before = document.getElementById('demo-before');
-      var after = document.getElementById('demo-after');
-      var divider = document.getElementById('demo-divider');
-      var dragging = false;
-
-      function setPosition(x) {
-        var rect = demo.getBoundingClientRect();
-        var pct = Math.max(0.1, Math.min(0.9, (x - rect.left) / rect.width)) * 100;
-        before.style.right = (100 - pct) + '%';
-        after.style.left = pct + '%';
-        divider.style.left = pct + '%';
-      }
-
-      demo.addEventListener('mousedown', function(e) { dragging = true; setPosition(e.clientX); });
-      window.addEventListener('mousemove', function(e) { if (dragging) { e.preventDefault(); setPosition(e.clientX); } });
-      window.addEventListener('mouseup', function() { dragging = false; });
-
-      demo.addEventListener('touchstart', function(e) { dragging = true; setPosition(e.touches[0].clientX); }, { passive: true });
-      window.addEventListener('touchmove', function(e) { if (dragging) setPosition(e.touches[0].clientX); }, { passive: true });
-      window.addEventListener('touchend', function() { dragging = false; });
-    })();
-
     // Scroll reveal
     (function() {
       var els = document.querySelectorAll('.reveal');
