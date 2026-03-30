@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#0a0a0a">
+  <title>Blog — Polario</title>
+  <meta name="description" content="Tips, updates, and guides from the Polario team on photo editing, object removal, and image processing.">
+  <meta name="robots" content="index, follow">
+  <link rel="canonical" href="https://polario.now/blog.html">
+  <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16.png">
+  <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&family=Outfit:wght@300;400;500;600&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(8px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    body { animation: fadeIn 0.4s ease-out; }
+    :root {
+      --bg: #fafaf8; --bg-elevated: #ffffff; --text-primary: #0a0a0a;
+      --text-secondary: #6b6b6b; --text-tertiary: #9a9a9a;
+      --border: rgba(0,0,0,0.08); --accent: #1a1a1a;
+    }
+    @media (prefers-color-scheme: dark) {
+      :root {
+        --bg: #0a0a0a; --bg-elevated: #141414; --text-primary: #e8e8e4;
+        --text-secondary: #8a8a8a; --text-tertiary: #5a5a5a;
+        --border: rgba(255,255,255,0.08); --accent: #e8e8e4;
+      }
+    }
+    body { font-family: 'Outfit', -apple-system, sans-serif; background: var(--bg); color: var(--text-primary); -webkit-font-smoothing: antialiased; }
+    nav { display: flex; align-items: center; justify-content: space-between; padding: 20px 32px; border-bottom: 1px solid var(--border); }
+    .logo { font-family: 'Space Mono', monospace; font-weight: 700; font-size: 18px; letter-spacing: -0.5px; color: var(--text-primary); text-decoration: none; }
+    .logo span { color: var(--text-tertiary); font-weight: 400; font-size: 13px; margin-left: 10px; letter-spacing: 0; }
+    .nav-right { display: flex; align-items: center; gap: 20px; }
+    .nav-link { font-size: 14px; color: var(--text-secondary); text-decoration: none; font-weight: 400; transition: color 0.15s; }
+    .nav-link:hover { color: var(--text-primary); }
+    main {
+      max-width: 540px;
+      margin: 0 auto;
+      padding: 120px 24px 160px;
+      text-align: center;
+    }
+    .coming-soon-badge {
+      display: inline-block;
+      font-size: 11px;
+      font-weight: 500;
+      text-transform: uppercase;
+      letter-spacing: 1.5px;
+      color: var(--text-tertiary);
+      border: 1px solid var(--border);
+      padding: 6px 16px;
+      border-radius: 100px;
+      margin-bottom: 32px;
+    }
+    h1 {
+      font-size: 36px;
+      font-weight: 600;
+      letter-spacing: -1.5px;
+      margin-bottom: 16px;
+    }
+    .subtitle {
+      font-size: 17px;
+      color: var(--text-secondary);
+      font-weight: 300;
+      line-height: 1.6;
+      margin-bottom: 48px;
+    }
+    .topics {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 8px;
+      margin-bottom: 48px;
+    }
+    .topic {
+      font-size: 13px;
+      color: var(--text-secondary);
+      background: var(--bg-elevated);
+      border: 1px solid var(--border);
+      padding: 6px 14px;
+      border-radius: 100px;
+      font-weight: 400;
+    }
+    .back-link {
+      font-size: 14px;
+      color: var(--text-tertiary);
+      text-decoration: none;
+      transition: color 0.15s;
+    }
+    .back-link:hover { color: var(--text-primary); }
+    footer { text-align: center; padding: 24px; font-size: 12px; color: var(--text-tertiary); border-top: 1px solid var(--border); }
+    footer a { color: var(--text-secondary); text-decoration: none; }
+    footer a:hover { color: var(--text-primary); }
+    @media (max-width: 600px) {
+      nav { padding: 16px 20px; }
+      main { padding: 80px 20px 120px; }
+      h1 { font-size: 28px; }
+    }
+  </style>
+</head>
+<body>
+  <nav>
+    <a href="/" class="logo">polario<span>.now</span></a>
+    <div class="nav-right">
+      <a href="/" class="nav-link">Home</a>
+    </div>
+  </nav>
+  <main>
+    <div class="coming-soon-badge">Coming soon</div>
+    <h1>The Polario Blog</h1>
+    <p class="subtitle">Guides, tips, and updates on photo editing, object removal, and getting the most out of Polario.</p>
+    <div class="topics">
+      <span class="topic">Tutorials</span>
+      <span class="topic">Product updates</span>
+      <span class="topic">Photography</span>
+      <span class="topic">Tips & tricks</span>
+    </div>
+    <a href="/" class="back-link">&larr; Back to polario.now</a>
+  </main>
+  <footer>
+    <a href="/">polario.now</a> &middot; <a href="https://lirium.ai">Challenger Corporation USA, S.A.</a> &middot; <a href="mailto:team@lirium.ai">team@lirium.ai</a> &middot; <a href="https://app.polario.now/terms.html">Terms</a> &middot; <a href="https://app.polario.now/privacy.html">Privacy</a>
+  </footer>
+</body>
+</html>

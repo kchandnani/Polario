@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://polario.now/sitemap.xml
