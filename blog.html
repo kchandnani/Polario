@@ -4,13 +4,49 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="theme-color" content="#0a0a0a">
-  <title>Blog — Polario</title>
-  <meta name="description" content="Tips, updates, and guides from the Polario team on photo editing, object removal, and image processing.">
+  <title>Blog | Polario | Photo Editing Tips, Guides & Product Updates</title>
+  <meta name="description" content="Guides, tips, and product updates from Polario, the photo editing tool for removing watermarks, upscaling images, and enhancing photos.">
+  <meta name="keywords" content="photo editing blog, AI image editing tips, watermark removal guide, image upscaling, photo enhancement, Polario updates">
   <meta name="robots" content="index, follow">
   <link rel="canonical" href="https://polario.now/blog.html">
+  <link rel="sitemap" type="application/xml" href="/sitemap.xml">
   <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32.png">
   <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16.png">
   <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+
+  <!-- Open Graph -->
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://polario.now/blog.html">
+  <meta property="og:title" content="Polario Blog — Photo Editing Tips & Product Updates">
+  <meta property="og:description" content="Guides, tips, and updates from the Polario team on AI photo editing.">
+  <meta property="og:image" content="https://polario.now/og-image.png">
+
+  <!-- Twitter Card -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Polario Blog — Photo Editing Tips & Product Updates">
+  <meta name="twitter:description" content="Guides, tips, and updates from the Polario team on AI photo editing.">
+  <meta name="twitter:image" content="https://polario.now/og-image.png">
+
+  <!-- Structured Data -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Blog",
+    "name": "Polario Blog",
+    "description": "Guides, tips, and product updates from the Polario team.",
+    "url": "https://polario.now/blog.html",
+    "publisher": {
+      "@type": "Organization",
+      "name": "Polario",
+      "url": "https://polario.now",
+      "logo": {
+        "@type": "ImageObject",
+        "url": "https://polario.now/apple-touch-icon.png"
+      }
+    }
+  }
+  </script>
+
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link href="https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&family=Outfit:wght@300;400;500;600&display=swap" rel="stylesheet">
   <style>
@@ -41,59 +77,48 @@
     .nav-link { font-size: 14px; color: var(--text-secondary); text-decoration: none; font-weight: 400; transition: color 0.15s; }
     .nav-link:hover { color: var(--text-primary); }
     main {
-      max-width: 540px;
+      max-width: 640px;
       margin: 0 auto;
-      padding: 120px 24px 160px;
-      text-align: center;
-    }
-    .coming-soon-badge {
-      display: inline-block;
-      font-size: 11px;
-      font-weight: 500;
-      text-transform: uppercase;
-      letter-spacing: 1.5px;
-      color: var(--text-tertiary);
-      border: 1px solid var(--border);
-      padding: 6px 16px;
-      border-radius: 100px;
-      margin-bottom: 32px;
+      padding: 48px 24px 80px;
     }
     h1 {
       font-size: 36px;
       font-weight: 600;
       letter-spacing: -1.5px;
-      margin-bottom: 16px;
+      margin-bottom: 40px;
     }
-    .subtitle {
-      font-size: 17px;
+    .post-list {
+      list-style: none;
+      padding: 0;
+    }
+    .post-list li {
+      border-bottom: 1px solid var(--border);
+    }
+    .post-list a {
+      display: block;
+      padding: 24px 0;
+      text-decoration: none;
+      transition: opacity 0.15s;
+    }
+    .post-list a:hover { opacity: 0.7; }
+    .post-title {
+      font-size: 20px;
+      font-weight: 500;
+      letter-spacing: -0.5px;
+      color: var(--text-primary);
+      margin-bottom: 6px;
+    }
+    .post-excerpt {
+      font-size: 15px;
       color: var(--text-secondary);
       font-weight: 300;
-      line-height: 1.6;
-      margin-bottom: 48px;
+      line-height: 1.5;
+      margin-bottom: 6px;
     }
-    .topics {
-      display: flex;
-      flex-wrap: wrap;
-      justify-content: center;
-      gap: 8px;
-      margin-bottom: 48px;
-    }
-    .topic {
+    .post-date {
       font-size: 13px;
-      color: var(--text-secondary);
-      background: var(--bg-elevated);
-      border: 1px solid var(--border);
-      padding: 6px 14px;
-      border-radius: 100px;
-      font-weight: 400;
-    }
-    .back-link {
-      font-size: 14px;
       color: var(--text-tertiary);
-      text-decoration: none;
-      transition: color 0.15s;
     }
-    .back-link:hover { color: var(--text-primary); }
     footer { text-align: center; padding: 24px; font-size: 12px; color: var(--text-tertiary); border-top: 1px solid var(--border); }
     footer a { color: var(--text-secondary); text-decoration: none; }
     footer a:hover { color: var(--text-primary); }
@@ -112,16 +137,23 @@
     </div>
   </nav>
   <main>
-    <div class="coming-soon-badge">Coming soon</div>
-    <h1>The Polario Blog</h1>
-    <p class="subtitle">Guides, tips, and updates on photo editing, object removal, and getting the most out of Polario.</p>
-    <div class="topics">
-      <span class="topic">Tutorials</span>
-      <span class="topic">Product updates</span>
-      <span class="topic">Photography</span>
-      <span class="topic">Tips & tricks</span>
-    </div>
-    <a href="/" class="back-link">&larr; Back to polario.now</a>
+    <h1>Blog</h1>
+    <ul class="post-list">
+      <li>
+        <a href="/blog/remove-watermarks-2026.html">
+          <div class="post-title">How to remove watermarks from photos in 2026 (3 methods)</div>
+          <div class="post-excerpt">Clone stamp, online tools, or AI apps: which method actually works? We compare all three by speed, quality, and cost.</div>
+          <div class="post-date">April 2026</div>
+        </a>
+      </li>
+      <li>
+        <a href="/blog/polario-enhance-announcement.html">
+          <div class="post-title">Polario is becoming more than a photo cleaner</div>
+          <div class="post-excerpt">We started with one-tap removal. Now we're adding Enhance: upscaling, sharpening, and noise reduction.</div>
+          <div class="post-date">April 2026</div>
+        </a>
+      </li>
+    </ul>
   </main>
   <footer>
     <a href="/">polario.now</a> &middot; <a href="https://lirium.ai">Challenger Corporation USA, S.A.</a> &middot; <a href="mailto:team@lirium.ai">team@lirium.ai</a> &middot; <a href="https://app.polario.now/terms.html">Terms</a> &middot; <a href="https://app.polario.now/privacy.html">Privacy</a>
